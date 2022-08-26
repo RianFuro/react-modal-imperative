@@ -1,0 +1,17 @@
+.react-modal-imperative__container {
+	width: 100vw;
+	height: 100vh;
+	background-color: #ffffffcc;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.react-modal-imperative__container .react-modal-imperative__wrapper {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
