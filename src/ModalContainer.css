@@ -1,10 +1,10 @@
 .react-modal-imperative__container {
-	width: 100vw;
-	height: 100vh;
 	background-color: #ffffffcc;
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
+	right: 0;
+	bottom: 0;
 }
 
 .react-modal-imperative__container .react-modal-imperative__wrapper {

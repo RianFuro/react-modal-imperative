@@ -1,5 +1,5 @@
 import { createPortal } from 'react-dom'
-import { createContext, useContext, useState, ReactNode } from 'react'
+import {createContext, useContext, useState, ReactNode, PropsWithChildren} from 'react'
 import './ModalContainer.css'
 
 export type ModalContext = {
@@ -12,7 +12,11 @@ const Context = createContext<ModalContext>({
   close: () => { throw new Error('Must be used inside context') },
 })
 
-export function Provider({children}) {
+export type ProviderProps = PropsWithChildren<{
+  className?: string
+  style?: Record<string, string>
+}>
+export function Provider({ className = '', style = {}, children }: ProviderProps) {
   const [modalComponent, setModalComponent] = useState<ReactNode | null>(null)
 
   const onSplashClicked = e => {
@@ -29,7 +33,9 @@ export function Provider({children}) {
   }}>
     {children}
     {createPortal(
-      <div className="react-modal-imperative__container" style={!modalComponent ? {display: 'none'}: {}}>
+      <div className={`react-modal-imperative__container ${className}`}
+           style={{ ...style, ...(!modalComponent ? {display: 'none'}: {}) }}
+      >
         <div className="react-modal-imperative__wrapper" onClick={onSplashClicked}>
           {modalComponent}
         </div>
