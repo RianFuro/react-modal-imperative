@@ -1,11 +1,19 @@
 import { createPortal } from 'react-dom'
-import {createContext, useContext, useState} from 'react'
+import { createContext, useContext, useState, ReactNode } from 'react'
 import './ModalContainer.css'
 
-const Context = createContext({})
+export type ModalContext = {
+  open: (component: ReactNode) => unknown,
+  close: () => unknown
+}
+
+const Context = createContext<ModalContext>({
+  open: () => { throw new Error('Must be used inside context') },
+  close: () => { throw new Error('Must be used inside context') },
+})
 
 export function Provider({children}) {
-  const [modalComponent, setModalComponent] = useState(null)
+  const [modalComponent, setModalComponent] = useState<ReactNode | null>(null)
 
   const onSplashClicked = e => {
     if (e.target === e.currentTarget) setModalComponent(null)
