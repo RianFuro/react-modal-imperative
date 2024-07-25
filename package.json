@@ -1,6 +1,6 @@
 {
   "name": "@rianfuro/react-modal-imperative",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "",
   "main": "dist/cjs/index.js",
   "scripts": {
