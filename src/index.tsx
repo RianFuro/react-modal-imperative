@@ -49,7 +49,7 @@ export function Provider({ className = '', style = {}, children }: ProviderProps
 
   function close(reference?: string) {
     if (reference) setDialogs(dialogs => dialogs.filter(d => d.reference !== reference))
-    else setDialogs(dialogs => dialogs.slice(1))
+    else setDialogs(dialogs => dialogs.slice(0, -1))
   }
 
   function closeAll() {
