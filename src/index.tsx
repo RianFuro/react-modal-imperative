@@ -1,4 +1,4 @@
-import {createContext, useContext, useState, ReactNode, PropsWithChildren, CSSProperties, Fragment} from 'react'
+import {createContext, useContext, useState, ReactNode, PropsWithChildren, CSSProperties, Fragment, useEffect, useRef} from 'react'
 import { createPortal } from 'react-dom'
 import './ModalContainer.css'
 
@@ -30,9 +30,18 @@ export type ProviderProps = PropsWithChildren<{
 }>
 export function Provider({ className = '', style = {}, children }: ProviderProps) {
   const [dialogs, setDialogs] = useState<Dialog[]>([])
+  const originalTarget = useRef(null)
 
+  useEffect(() => {
+    function onMouseDown(e) {
+      originalTarget.current = e.target
+    }
+
+    document.addEventListener('mousedown', onMouseDown)
+    return () => document.removeEventListener('mousedown', onMouseDown)
+  }, [])
   const onSplashClicked = e => {
-    if (e.target === e.currentTarget) close()
+    if (e.target === e.currentTarget && originalTarget.current === e.target) close()
   }
 
   function open(component: ReactNode) {
